@@ -30,9 +30,9 @@ public class RollingPinController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other) // 当 RollingPin 的 collider 和其他 collider 相撞后离开
     {
+        Debug.Log("Rolling pin exited collider!");
         if (other.CompareTag("SmallDough")) 
         {
-            Debug.Log("Small dough is rolled flat!");
             Vector3 doughPosition = other.transform.position;
             Destroy(other.gameObject); 
             Instantiate(donutManager.flatDoughPrefab, doughPosition, Quaternion.identity); 
