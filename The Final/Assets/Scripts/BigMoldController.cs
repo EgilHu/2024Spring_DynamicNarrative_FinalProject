@@ -1,15 +1,14 @@
 using UnityEngine;
 
-public class RollingPinController : MonoBehaviour
+public class BigMoldController : MonoBehaviour
 {
     private Vector3 offset;
-    private Vector3 initialPosition; // 存储擀面杖的初始位置
+    private Vector3 initialPosition; 
     private DonutManager donutManager; // 对 DonutManager 类的引用
-    private bool isRolling = false; // 是否正在擀面
-
+    private bool isMolding = false; // 是否正在模具
     void Start()
     {
-        initialPosition = transform.position; // 在游戏开始时记录擀面杖的初始位置
+        initialPosition = transform.position; // 在游戏开始时初始位置
         donutManager = FindObjectOfType<DonutManager>(); // 获取 DonutManager 类的引用
     }
 
@@ -22,22 +21,23 @@ public class RollingPinController : MonoBehaviour
     {
         Vector3 newPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;
         transform.position = new Vector3(newPosition.x, newPosition.y, transform.position.z);
-        isRolling = true; // 设置为正在擀面
+        isMolding = true; // 设置为正在模具
     }
 
     private void OnMouseUp() // 鼠标松开
     {
-        transform.position = initialPosition; // 将擀面杖的位置重置为初始位置
-        isRolling = false;
+        transform.position = initialPosition; // 位置重置为初始位置
+        isMolding = false;
     }
 
-    private void OnTriggerExit2D(Collider2D other) // 当 RollingPin 的 collider 和其他 collider 相撞后离开
+    private void OnTriggerExit2D(Collider2D other) //  collider 和其他 collider 相撞后离开
     {
-        if (other.CompareTag("SmallDough") && isRolling) 
+        /*Debug.Log("Rolling pin exited collider!");*/
+        if (other.CompareTag("FlatDough") && isMolding) 
         {
             Vector3 doughPosition = other.transform.position;
             Destroy(other.gameObject); 
-            Instantiate(donutManager.flatDoughPrefab, doughPosition, Quaternion.identity); 
+            Instantiate(donutManager.BigSizeDonutDoughPrefab, doughPosition, Quaternion.identity); 
         }
     }
 }

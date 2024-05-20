@@ -6,6 +6,7 @@ TagManager:
   tags:
   - RollingPin
   - SmallDough
+  - FlatDough
   layers:
   - Default
   - TransparentFX
