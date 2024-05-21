@@ -27,7 +27,7 @@ public class BigMoldController : MonoBehaviour
     private void OnMouseUp() // 鼠标松开
     {
         transform.position = initialPosition; // 位置重置为初始位置
-        isMolding = false;
+        /*isMolding = false;*/
     }
 
     private void OnTriggerExit2D(Collider2D other) //  collider 和其他 collider 相撞后离开
